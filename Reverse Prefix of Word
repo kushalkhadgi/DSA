@@ -1,0 +1,40 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string rever(string word, char ch)
+{
+    size_t index = -1;
+    index = word.find(ch);
+
+    if(index == -1)
+    {
+        return word;
+    }
+    if(index == -1)
+        return word;
+
+    int start = 0, end = index;
+
+    while(start < end)
+    {
+        swap(word[start++], word[end--]);
+    }
+    return word;
+}
+
+int main()
+{
+    string word;
+    cout<<"Enter the Word : ";
+    cin>>word;
+
+    char ch;
+    cout<<"Enter the character : ";
+    cin>>ch;
+
+    cout<< rever(word, ch);
+
+    return 0;
+}
