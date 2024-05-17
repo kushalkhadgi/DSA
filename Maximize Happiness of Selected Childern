@@ -1,0 +1,59 @@
+
+#include <iostream>
+
+using namespace std;
+
+void happpiness(int *array, int length, int &count)
+{
+    int max = INT32_MIN, index;
+
+    for(auto i = 0; i < length; i++)
+    {
+        if(array[i] > max)
+        {
+            max = array[i];
+            index = i;
+        }
+    }
+
+    count += array[index];
+    array[index] = '\0';
+
+    for(auto i = 0; i < length; i++)
+    {
+        if(i == index)
+        {
+            continue;
+        }
+        array[i] -= 1;
+    }
+}
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of array : ";
+    cin>>length;
+
+    int array[100];
+    cout<<"Enter the array"<<endl;
+    for(auto i = 0; i <length; i++)
+    {
+        cin>>array[i];
+    }
+
+    int k, count = 0, loop = 0;
+    cout<<"Enter k : ";
+    cin>>k;
+
+    for(auto i = 0; i < length; i++)
+    {
+        if(array[i] != 0 && loop < k)
+        {
+            happpiness(array, length, count);
+            loop++;
+        }
+    }
+    cout<<"Happiness : "<<count;
+    return 0;
+}
