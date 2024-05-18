@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string version1, version2;
+
+    cout<<"Enter Version 1 : ";
+    cin>>version1;
+
+    cout<<"Enter Version 2 : ";
+    cin>>version2;
+
+    pair<int, int>answer = {0, 0};
+
+    int i = 0, j = 0;
+    while(i < version1.length())
+    {
+        char alphabet = version1[i];
+        i++;
+        if(alphabet == '0' || alphabet == '.')
+        {
+            continue;
+        }
+        answer.first = (answer.first * 10) + (alphabet - '0');
+    }
+
+    while(j < version2.length())
+    {
+        char alphabet = version2[j];
+        j++;
+        if(alphabet == '0' || alphabet == '.')
+        {
+            continue;
+        }
+        answer.second = (answer.second * 10) + (alphabet - '0');
+        j++;
+    }
+
+    if(answer.first < answer.second)
+    {
+        cout<<"-1";
+        return 0;
+    }
+    else if(answer.first > answer.second)
+    {
+        cout<<"1";
+        return 0;
+    }
+    else{
+        cout<<"0";
+        return 0;
+    }
+
+    return 0;
+}
