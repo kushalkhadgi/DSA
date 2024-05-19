@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int number;
+    cout << "Enter the length of array : ";
+    cin >> number;
+
+    vector<int> people(number);
+    cout << "Enter array elements" << endl;
+    for (auto i = 0; i < number; i++) {
+        cin >> people[i];
+    }
+
+    int limit, count = 0;
+    cout << "Enter the limit : ";
+    cin >> limit;
+
+    sort(people.begin(), people.end());
+
+    int left = 0, right = number - 1;
+    while (left <= right) {
+        if (people[left] + people[right] <= limit) {
+            left++;
+            right--;
+        } else {
+            right--;
+        }
+        count++;
+    }
+
+    cout << "Number of boats: " << count << endl;
+    return 0;
+}
