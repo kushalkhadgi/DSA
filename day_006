@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int solve(int index, int *array, int current, int length, int sum)
+{
+    
+    if(index >= length)
+    {
+        sum += current;
+        return sum;
+    }
+
+    sum = solve(index+1, array, current ^ array[index], length, sum);
+
+    sum = solve(index+1, array, current, length, sum);
+
+    return sum;
+}
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of array : ";
+    cin>>length;
+
+    int array[100];
+    cout<<"Enter Array"<<endl;
+    for(int i = 0; i < length; i++)
+    {
+        cin>>array[i];
+    }
+
+    int sum = 0;
+
+    cout<<solve(0, array, 0, length, sum);
+
+    return 0;
+}
