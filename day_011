@@ -1,0 +1,45 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool match(string first, string second)
+{
+    for(auto i = 0; i < first.length(); i++)
+    {
+        int index = 0;
+        if(first[i] == second[index])
+        {
+            while (index < second.length())
+            {
+                if(first[i++] != second[index++])
+                    return false;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+int main()
+{
+    string a, b;
+    cout<<"Enter first string : ";
+    getline(cin, a);
+
+    cout<<"Enter second string (second > first) : ";
+    getline(cin, b);
+
+    bool flag = false;
+    int count = 1;
+
+    while(!flag)
+    {
+        a += a;
+        count++;
+
+        flag = match(a, b);
+    }
+
+    cout<<"Answer : "<<count;
+    return 0;
+}
