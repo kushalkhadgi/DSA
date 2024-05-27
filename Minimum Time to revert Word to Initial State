@@ -1,0 +1,44 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool check(string word, string temp)
+{
+    for(int i = 0; i < word.length(); i++)
+    {
+        if(word[i] != temp[i])
+            return false;
+    }
+    return true;
+}
+
+int main()
+{
+    string word;
+    cout<<"Enter Word : ";
+    cin>>word;
+
+    cout<<"Enter value of k : ";
+    int k;
+    cin>>k;
+
+    int count = 0;
+    string temp = word;
+    bool flag = false;
+
+    while(!flag)
+    {
+        string remove = "";
+        for(auto i = 0; i < k; i++)
+        {
+            remove.push_back(temp[i]);
+        }
+        temp.erase(0, k);
+        temp += remove;
+        flag = check(word, temp);
+        count++;
+        cout<<temp<<endl;
+    }
+    cout<<"Answer : "<<count;
+    return 0;
+}
