@@ -1,0 +1,49 @@
+#include <iostream>
+
+using namespace std;
+
+void remove(int index, int length, int *array)
+{
+    for(int i = index; i < length; i++)
+    {
+        array[i] = array[i+1];
+    }
+    return;
+}
+
+int main()
+{
+    cout<<"Enter the length of array : ";
+    int length;
+    cin>>length;
+
+    int array[100];
+    cout<<"Enter the array"<<endl;
+    for(int i = 0; i < length; i++)
+    {
+        cin>>array[i];
+    }
+
+    for(int i = 0; i < length; i++)
+    {
+        for(int j = i+1; j < length; j++)
+        {
+            if(array[i] == array[j])
+            {
+                remove(i, length, array);
+                length--;
+                i--;
+                j--;
+                remove(j, length, array);
+                length--;
+                i--;
+                j--;
+            }
+        }
+    }
+    for(int number = 0; number < length; number++)
+    {
+        cout<<array[number]<<" ";
+    }
+    return 0;
+}
