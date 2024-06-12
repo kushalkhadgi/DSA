@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+char replace(string text, int index, int& skip_count)
+{
+    string find[6] = {"&quot;", "&apos;", "&amp;", "&gt;", "&lt;", "&frasl;"};
+    char with[6] = {'"', '\'', '&', '>', '<', '/'};
+    for(int j = 0; j < 6; j++)
+    {
+        string word = find[j];
+        bool flag = true;
+        for(int i = 0; i < word.length(); i++)
+        {
+            if(index + i >= text.length() || text[index + i] != word[i])
+            {
+                flag = false;
+                break;
+            }
+        }
+        if(flag)
+        {
+            skip_count = word.length() - 1;
+            return with[j];
+        }
+    }
+    skip_count = 0;
+    return text[index];
+}
+
+int main()
+{
+    string text;
+    getline(cin, text);
+
+    int length = text.length();
+    string answer;
+
+    for(int i = 0; i < length; i++)
+    {
+        if(text[i] == '&')
+        {
+            int skip_count = 0;
+            char replace_with = replace(text, i, skip_count);
+            answer.push_back(replace_with);
+            i += skip_count;
+        }
+        else
+        {
+            answer.push_back(text[i]);
+        }
+    }
+
+    cout << "Processed text: " << answer << endl;
+    return 0;
+}
