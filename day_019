@@ -1,0 +1,106 @@
+
+#include <iostream>
+using namespace std;
+
+int count_brackets(char parenthesis[], int length)
+{
+    int count = 0;
+
+    for(int i = 0; i < length; i++)
+    {
+        if(parenthesis[i] == '(')
+        {
+            count += 1;
+        }
+        else{
+            count -= 1;
+        }
+    }
+    return count;
+}
+
+
+void change_closing_bracket(char *parenthesis, bool locked[], int length, int count)
+{
+    for(int i = 0; i < length; i++)
+    {
+        // if(parenthesis[i] == ')' && !locked[i] && count_brackets(parenthesis, i) >= 0)
+        if(parenthesis[i] == ')' && !locked[i] && count < 0)
+        {
+            parenthesis[i] = '(';
+            count++;
+        }
+    }
+    return;
+}
+
+void change_opening_bracket(char *parenthesis, bool locked[], int length, int count)
+{
+    for(int i = 0; i < length; i++)
+    {
+        // if(parenthesis[i] == '(' && !locked[i] && count_brackets(parenthesis, i) <= 0)
+        if(parenthesis[i] == '(' && !locked[i] && count > 0)
+        {
+            parenthesis[i] = ')';
+            count++;
+        }
+    }
+    return;
+}
+
+
+int main()
+{
+    cout<<"Enter the length of string : ";
+    int length;
+    cin>>length;
+
+    char parenthesis[100];
+    bool locked[100];
+
+    cout<<"Enter the locked string (Contain Binary digits i.e. 0s and 1s)"<<endl;
+    for(auto i = 0; i < length; i++)
+    {
+        cin>>locked[i];
+    }
+    cout << "Enter the parenthesis string (Contain only \"(\" and \")\") " << endl;
+    for(auto i = 0; i < length; i++)
+    {
+        cin>>parenthesis[i];
+    }
+    
+    if(length % 2 != 0)
+    {
+        cout<<"false";
+        return 0;
+    }
+
+    int count = count_brackets(parenthesis, length);
+    
+    if(count < 0)
+    {
+        change_closing_bracket(parenthesis, locked, length, count/2);
+    }
+    else if(count > 0)
+    {
+        change_opening_bracket(parenthesis, locked, length, count/2);
+    }
+
+    for(auto character: parenthesis)
+    {
+        cout<<character<<" ";
+    }
+
+    if(count_brackets(parenthesis, length) == 0)
+    {
+        cout<<"Answer : True";
+    }
+    else
+    {
+        cout<<"Answer : False";
+    }
+
+    cout<<endl;
+    
+    return 0;
+}
