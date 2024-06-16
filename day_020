@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int operation(int &answer, int temp, char op)
+{
+    switch(op)
+    {
+        case '+':
+            answer += temp;
+            break;
+        case '-':
+            answer -= temp;
+            break;
+        case '*':
+            answer *= temp;
+            break;
+        case '/':
+            answer /= temp;
+            break;
+    }
+    return answer;
+}
+
+int main()
+{
+    string s;
+    cout << "Enter Mathematical Expression : ";
+    getline(cin, s);
+
+    int answer = 0;
+    int temp = 0;
+    char op = '\0'; 
+
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (isdigit(s[i]))
+        {
+            temp = temp * 10 + (s[i] - '0'); 
+        }
+        else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/')
+        {
+            if (op != '\0')
+            {
+                operation(answer, temp, op);
+            }
+            else
+            {
+                answer = temp;
+            }
+            op = s[i]; 
+            temp = 0;
+        }
+    }
+    operation(answer, temp, op);
+
+    cout << "Answer : " << answer << endl;
+    return 0;
+}
