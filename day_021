@@ -1,0 +1,36 @@
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of array : ";
+    cin>>length;
+
+    int array[100];
+    for(int i = 0; i < length; i++)
+    {
+        cin>>array[i];
+    }
+
+    int div, count = 0, sum = 0;
+    cout<<"Enter Dividend : ";
+    cin>>div;
+
+    for(int i = 0; i < length; i++)
+    {
+        sum = 0;
+        for(int j = i; j < length; j++)
+        {
+            sum += array[j];
+        
+            if(sum % div == 0)
+            {
+                count += 1;
+            }
+        }
+    }
+    cout<<count;
+    return 0;
+}
