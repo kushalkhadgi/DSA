@@ -1,0 +1,44 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+bool isUgly(int num)
+{
+    if(num == 1)
+        return true;
+    if(num <= 0)
+        return false;
+    
+    if(num % 2 == 0)
+        return isUgly(num/2);
+    if(num % 3 == 0)
+        return isUgly(num/3);
+    if(num % 5 == 0)
+        return isUgly(num/5);
+    
+    return false;
+}
+
+int main()
+{
+    int number;
+    cout<<"Enter the Number : ";
+    cin>>number;
+
+    vector<int> answer;
+    int count = 0;
+    for(int i = 1; count < number; i++)
+    {
+        if(isUgly(i))
+        {
+            answer.push_back(i);
+            count++;
+        }
+    }
+
+    for(int num: answer)
+    {
+        cout<<num <<" ";
+    }
+    return 0;
+}
