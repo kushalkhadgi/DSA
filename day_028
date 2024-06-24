@@ -1,0 +1,54 @@
+
+#include <iostream>
+using namespace std;
+
+bool isLucky (int matrix[][100], int row, int col, int number, int i, int j)
+{
+
+  for (int k = 0; k < col; k++)
+	{
+	  if (matrix[i][k] < number)
+		{
+		  return false;
+		}
+	}
+  for (int k = 0; k < row; k++)
+	{
+	  if (matrix[k][j] > number)
+		{
+		  return false;
+		}
+	}
+  return true;
+}
+
+int main ()
+{
+  int row, col;
+  cout << "Enter the number of rows and columns in matrix" << endl;
+  cin >> row >> col;
+
+  int matrix[100][100];
+
+  cout << "Enter the elements in the matrix" << endl;
+  for (int i = 0; i < row; i++)
+	{
+	  for (int j = 0; j < col; j++)
+		{
+		  cin >> matrix[i][j];
+		}
+	}
+  for (int i = 0; i < row; i++)
+	{
+	  for (int j = 0; j < col; j++)
+		{
+		  if (isLucky (matrix, row, col, matrix[i][j], i, j))
+			{
+			  cout << matrix[i][j] << " is Lucky number in Matrix";
+			  return 0;
+			}
+		}
+	}
+  cout << "There is no lucky Nnmber in Matrix";
+  return 0;
+}
