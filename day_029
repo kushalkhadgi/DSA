@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void countandsay(string &answer)
+{
+    string temp = answer;
+    answer = "";
+    for(int i = 0; i < temp.length(); i++)
+    {
+        int count = 1;
+        char originalnum = temp[i];
+        while(temp[i] == temp[i+1] && i+1 < temp.length())
+        {
+            count++;
+            i++;
+        }
+        answer += to_string(count) + originalnum;
+    }
+    return;
+}
+
+int main()
+{
+    int number;
+    cout<<"Enter the Number : ";
+    cin>>number;
+
+    string answer = "1";
+
+    while(number-1 > 0)
+    {
+        countandsay(answer);
+        number--;
+    }
+
+    cout<<answer;
+    return 0;
+}
