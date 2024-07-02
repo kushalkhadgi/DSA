@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+ 
+//Creating a node
+class Node 
+{ 
+    public:
+    int data;
+    Node * next;
+  
+    Node (int value) 
+    { 
+        data = value;
+        next = NULL;
+    } 
+};
+
+
+// Insertion at the starting
+void insertatbegin (int data, Node * &head) 
+{ 
+    Node * new_node = new Node (data);
+    new_node->next = head;
+    head = new_node;
+} 
+
+int main() 
+{
+//LL creation with a node
+	Node * new_node = new Node (10);
+  
+//Inserting the values at beginning of LL
+	insertatbegin (20, new_node);
+    insertatbegin (30, new_node);
+    insertatbegin (40, new_node);
+    insertatbegin (50, new_node);
+  
+    Node * temp = new_node;
+  
+    for (; temp != NULL; temp = temp->next)
+	{
+	    cout << temp->data << "->";
+        // cout<<" Data : "<< temp->data;
+        // cout<<" temp : "<<temp;
+        //cout<<" Next : "<< temp->next<<endl;
+	}
+    return 0;
+}
