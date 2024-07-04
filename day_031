@@ -1,0 +1,64 @@
+
+#include <iostream>
+using namespace std;
+
+bool intersection(int larger[], int llength, int smaller[], int slength)
+{
+    for(int i = 0; i < llength; i++)
+    {
+        if(larger[i] == smaller[0])
+        {
+            int index = i;
+            int j = 0;
+            while(smaller[j] == larger[index])
+            {
+                if(j == slength-1)
+                {
+                    return true;
+                }
+                index++;
+                j++;
+            }
+        }
+    }
+    return false;
+}
+
+int main()
+{
+    int length1, length2;
+    cout<<"Enter length of first and second length "<<endl;
+    cin>>length1 >>length2;
+
+    int array1[length1], array2[length2];
+    cout<<"Enter elements of first array"<<endl;
+    for(auto i = 0; i < length1; i++)
+    {
+        cin>>array1[i];
+    }
+    cout<<"Enter elements of second array"<<endl;
+    for(auto i = 0; i < length2; i++)
+    {
+        cin>>array2[i];
+    }
+
+    bool result;
+    if(length1 > length2)
+    {
+        result = intersection(array1, length1, array2, length2);
+    }
+    else
+    {
+        result = intersection(array2, length2, array1, length1);
+    }
+
+    if(result)
+    {
+        cout<<"Both array Intersect";
+    }
+    else
+    {
+        cout<<"Both array do not intersect each other";
+    }
+    return 0;
+}
