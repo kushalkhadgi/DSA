@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+
+//Creating a node
+class Node
+{
+    public:
+    int data;
+    Node *next;
+
+    Node(int value)
+    {
+        data = value;
+        next = NULL;
+    }
+};
+
+
+//Insertion at the end 
+void insertatend(int data, Node* &head)
+{
+    Node* new_node = new Node(data);
+    if(head == NULL)
+    {
+        head = new_node;
+        return;
+    }
+    Node* start = head;
+    while(start->next != NULL)
+    {
+        start = start->next;
+    }
+    start->next = new_node;
+}
+
+
+int main()
+{
+    //LL creation with a node
+    Node* new_node = nullptr;
+
+    insertatend(10, new_node);
+    insertatend(20, new_node);
+    insertatend(30, new_node);
+    insertatend(40, new_node);
+    insertatend(50, new_node);
+
+    //Printing the LL
+    Node* temp = new_node;
+    for(; temp != NULL; temp = temp->next)
+    {
+        cout<<temp->data<<"->";
+        // cout<<" Data : "<< temp->data;
+        // cout<<" temp : "<<temp;
+        // cout<<" Next : "<< temp->next<<endl;
+    }
+
+    
+    return 0;
+}
