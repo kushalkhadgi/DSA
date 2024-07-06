@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+
+//Creating a node
+class Node
+{
+    public:
+    int data;
+    Node *next;
+
+    Node(int value)
+    {
+        data = value;
+        next = NULL;
+    }
+};
+
+//Insertion at a specific index
+void insertatmid(int data, Node* &head, int index)
+{
+    Node* new_nde = new Node(data);
+    
+    if(head == nullptr)
+        head = new_nde;
+
+    Node* temp = head;
+    // int i = 0;
+    // while(i < index-1)
+    // {
+    //     temp = temp->next;
+    //     i++;
+    // }
+    for(int i = 0; i < index-1; i++)
+    {
+        temp = temp->next;
+    }
+    new_nde -> next = temp -> next;
+    temp -> next = new_nde;
+}
+
+int main()
+{
+    //LL creation with a node
+    Node* new_node = new Node(20);
+    insertatmid(30, new_node, 1);
+    insertatmid(40, new_node, 2);
+    insertatmid(50, new_node, 3);
+    insertatmid(60, new_node, 4);
+    insertatmid(70, new_node, 5);
+
+    //Printing the LL
+    Node* temp = new_node;
+    for(; temp != NULL; temp = temp->next)
+    {
+        cout<<temp->data<<"->";
+        // cout<<" Data : "<< temp->data;
+        // cout<<" temp : "<<temp;
+        // cout<<" Next : "<< temp->next<<endl;
+    }
+
+    
+    return 0;
+}
