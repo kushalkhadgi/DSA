@@ -1,0 +1,110 @@
+#include <iostream>
+using namespace std;
+
+
+//Creating a node
+class Node
+{
+    public:
+    int data;
+    Node *next;
+
+    Node(int value)
+    {
+        data = value;
+        next = NULL;
+    }
+};
+
+
+// Insertion at the starting
+void insertatbegin(int data, Node* &head)
+{
+    Node* new_node = new Node(data);
+    new_node->next = head;
+    head = new_node;
+}
+
+
+//Insertion at the end 
+void insertatend(int data, Node* &head)
+{
+    Node* new_node = new Node(data);
+    Node* start = head;
+    while(start->next != NULL)
+    {
+        start = start->next;
+    }
+    start->next = new_node;
+}
+
+
+
+//Insertion at a specific index
+void insertatmid(int data, Node* &head, int index)
+{
+    Node* new_nde = new Node(data);
+    Node* temp = head;
+    // int i = 0;
+    // while(i < index-1)
+    // {
+    //     temp = temp->next;
+    //     i++;
+    // }
+    for(int i = 0; i < index-1; i++)
+    {
+        temp = temp->next;
+    }
+    new_nde -> next = temp -> next;
+    temp -> next = new_nde;
+}
+
+
+
+//Update data of a node
+void updateatposition(int data, Node* &head, int index)
+{
+    int i = 0;
+    Node* temp = head;
+    while(i < index)
+    {
+        temp = temp->next;
+        i++;
+    }
+    temp -> data = data;
+}
+
+int main()
+{
+    //LL creation with a node
+    Node* new_node = new Node(10);
+
+
+    //Inserting the values at beginning of LL
+    insertatbegin(20, new_node);
+    insertatbegin(30, new_node);
+    insertatbegin(40, new_node);
+    insertatbegin(50, new_node);
+
+    //Inserting the values at the end of LL
+    insertatend(0, new_node);
+
+    //Insrting the value at a specific index
+    insertatmid(35, new_node, 1);
+
+    //Update a specific position in LL
+    updateatposition(45, new_node, 1);
+
+    //Printing the LL
+    Node* temp = new_node;
+    for(; temp != NULL; temp = temp->next)
+    {
+        cout<<temp->data<<"->";
+        // cout<<" Data : "<< temp->data;
+        // cout<<" temp : "<<temp;
+        // cout<<" Next : "<< temp->next<<endl;
+    }
+
+    
+    return 0;
+}
