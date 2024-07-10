@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data)
+    {
+        this->data = data;
+        next = NULL;
+    }
+};
+
+//Insert Node
+void insertatbegining(int data, Node* &head)
+{
+    Node* temp = new Node(data);
+    temp -> next = head;
+    head = temp;
+    return;
+}
+
+
+//Display LL
+void display(Node* head)
+{
+    Node* temp;
+    temp = head;
+
+    while(temp != NULL)
+    {
+        cout<<temp->data<<" ";
+        temp = temp->next;
+    }
+    cout<<endl;
+    return;
+}
+
+void deleteatbegining(Node* &head)
+{
+    Node* temp = head;
+    head = head -> next;
+    free(temp); //To free the memory utilized by starting Node
+    return;
+}
+
+
+int main()
+{
+    Node* new_node = NULL;
+
+    //Insert Element
+    insertatbegining(10, new_node);
+    insertatbegining(20, new_node);
+    insertatbegining(30, new_node);
+    insertatbegining(40, new_node);
+    insertatbegining(50, new_node);
+    insertatbegining(60, new_node);
+
+    //Print LL
+    display(new_node);
+
+    deleteatbegining(new_node);
+    display(new_node);
+
+    return 0;
+}
