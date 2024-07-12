@@ -1,0 +1,167 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+    public:
+    int data;
+    Node* previous;
+    Node* next;
+
+    Node(int data)
+    {
+        this -> data= data;
+        previous = NULL;
+        next = NULL;
+    }
+};
+
+
+class DoublyLinkedList
+{
+    public:
+    void insertatbegin(Node* &head, Node* &tail, int data)
+    {
+        Node* new_node = new Node(data);
+        if(head == nullptr)
+        {
+            head = new_node;
+            tail = new_node;
+            return;
+        }
+        new_node -> next = head;
+        head -> previous = new_node;
+        head = new_node;
+        return;
+    }
+
+    void insertatend(Node* &head, Node* &tail, int data)
+    {
+        Node* new_node = new Node(data);
+        if(tail == nullptr)
+        {
+            head = new_node;
+            tail = new_node;
+            return;
+        }
+        tail -> next = new_node;
+        new_node -> previous = tail;
+        tail = new_node;
+        return;
+    }
+
+    void insertatmid(Node* &head, Node* &tail, int data, int index)
+    {
+        if(index == 0)
+            return insertatbegin(head, tail, data);
+        
+        Node* new_node = new Node(data);
+        Node* temp = head;
+
+        for(int i = 0; i < index-1; i++)
+        {
+            temp = temp -> next;
+        }
+        new_node -> next = temp -> next;
+        temp -> next -> previous = new_node;
+        temp -> next = new_node;
+        new_node -> previous = temp;
+        
+        if(new_node -> next == nullptr)
+        {
+            tail = new_node;
+        }
+        return;
+    }
+
+    void deleteatbegin(Node* &head, Node* &tail)
+    {
+        if(head == nullptr)
+            return;
+        
+        Node* DEL = head;
+        head = head -> next;
+        head -> previous = NULL;
+        delete(DEL);
+        if(head == nullptr)
+            tail = nullptr;
+    }
+
+    void deleteatend(Node* &head, Node* &tail)
+    {
+        Node* DEL = tail;
+        tail = tail -> previous;
+        tail -> next = nullptr;
+        delete(DEL);
+        if(tail == nullptr)
+            head = nullptr;
+        return;
+    }
+
+    void deleteatmid(Node* &head, Node* &tail, int index)
+    {
+        if(index == 0)
+            return deleteatbegin(head, tail);
+        
+        Node* temp = head;
+        for(int i = 0; i < index-1; i++)
+        {
+            temp = temp -> next;
+        }
+        Node* DEL = temp -> next;
+        temp -> next = temp -> next -> next;
+        temp -> next -> previous = temp;
+        delete(DEL);
+
+        return;
+    }
+
+    void displayfrombegin(Node* head)
+    {
+        Node* temp = head;
+        while(temp != nullptr)
+        {
+            cout<<temp -> data<<" ";
+            temp = temp -> next;
+        }
+        cout<<endl;
+        return;
+    }
+
+    void displayfromend(Node* tail)
+    {
+        Node* temp = tail;
+        while(temp != nullptr)
+        {
+            cout<<temp -> data<<" ";
+            temp = temp -> previous;
+        }
+        cout<<endl;
+        return ;
+    }
+};
+
+int main()
+{
+    Node* head = nullptr;
+    Node* tail = nullptr;
+    DoublyLinkedList DLL;
+
+    DLL.insertatbegin(head, tail, 10);
+    DLL.insertatbegin(head, tail, 20);
+    DLL.insertatend(head, tail, 30);
+    DLL.insertatmid(head, tail, 15, 1);
+    DLL.insertatmid(head, tail, 25, 3);
+
+    DLL.displayfrombegin(head);
+    DLL.displayfromend(tail);
+
+    DLL.deleteatbegin(head, tail);
+    DLL.deleteatend(head, tail);
+    DLL.deleteatmid(head, tail, 1);
+
+    DLL.displayfrombegin(head);
+    DLL.displayfromend(tail);
+
+    return 0;
+}
