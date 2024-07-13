@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+int findindex(int length, int array[])
+{
+    int index;
+    int i = 1;
+    while(i < length)
+    {
+        if(array[i] > array[i - 1] && array[i] > array[i + 1])
+        {
+            return i;
+        }
+        if(array[i] < array[i + 1])
+        {
+            i++;
+        }
+        else{
+            i += 2;
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of array : ";
+    cin>>length;
+
+    int array[length];
+    for(auto i = 0; i < length; i++)
+    {
+        cin>>array[i];
+    }
+
+    int result = findindex(length, array);
+
+    cout<<"Greatest element is "<<array[result] <<" present at "<<result << " index in the arary.";
+
+    return 0;
+}
