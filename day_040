@@ -1,0 +1,22 @@
+int passpillow(int n, int time)
+{
+    time %= (n - 1) * 2;
+    if (time < n)  // Go forward from 1.
+      return 1 + time;
+    return n - (time - (n - 1)); 
+}
+
+int main()
+{
+    int n, time;
+
+    cout<<"Enter the value of n : ";
+    cin>>n;
+
+    cout<<"Enter the time : ";
+    cin>>time;
+
+    cout<<passpillow(n, time);
+
+    return 0;
+}
