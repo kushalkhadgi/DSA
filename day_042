@@ -1,0 +1,50 @@
+vector<int> shiftzeroes(vector<int>& array, int length)
+{
+    vector<int> answer(length);
+    fill_n(answer.begin(), length, 0);
+
+    int count = 0;
+    for(auto i = 0; i < length; i++)
+    {
+        if(array[i] == 0)
+            count++;
+    }
+
+    for(int i = count--, index = 0; i < length; i++, index++)
+    {
+        if(array[index] == 0)
+        {
+            i--;
+            continue;
+        }
+        answer[i] = array[index];
+    }
+    return answer;
+}
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of Array : ";
+    cin>>length;
+
+    vector<int> array(length);
+    for(auto i = 0; i < length; i++)
+    {
+        cout<<"Enter the Element at "<<i + 1<<" indx in the array ";
+        cin>>array[i];
+    }
+
+    for(int num : array)
+    {
+        cout<<num<<" ";
+    }cout<<endl;
+
+    vector<int> answer = shiftzeroes(array, length);
+
+    for(int num : answer)
+    {
+        cout<<num<<" ";
+    }
+    return 0;
+}
