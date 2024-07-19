@@ -1,0 +1,75 @@
+vector<int> sorted(int length, vector<int> array)
+{
+    //Selection Sort
+    // for(int i = 0; i < length - 1; i++)
+    // {
+    //     int min_index = i;
+    //     for(int j = i + 1; j < length; j++)
+    //     {
+    //         if(array[j] < array[min_index])
+    //         {
+    //             min_index = j;
+    //         }
+    //     }
+    //     int temp = array[i];
+    //     array[i] = array[min_index];
+    //     array[min_index] = temp;
+    // }
+
+    //Bubble Sort
+    for(int i = 0; i < length; i++)
+    {
+        for(int j = 0; j < length - i - 1; j++)
+        {
+            if(array[j] > array[j + 1])
+            {
+                int temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+    return array;
+}
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of Array : ";
+    cin>>length;
+
+    vector<int> array(length);
+    for(auto i = 0; i < length; i++)
+    {
+        cout<<"Enter the Element at "<<i + 1<<" indx in the array ";
+        cin>>array[i];
+    }
+
+    for(int num : array)
+    {
+        cout<<num<< " ";
+    }cout<<endl;
+
+    vector<int> final = sorted(length, array);
+
+    vector<int> even_odd_array;
+    for(int i = 0; i < length; i++)
+    {
+        if(final[i] == 0 || final[i] % 2 == 0)
+        {
+            even_odd_array.push_back(final[i]);
+        }
+    }
+    for(int i = 0; i < length; i++)
+    {
+        if(final[i] == 1 || final[i] % 2 != 0)
+        {
+            even_odd_array.push_back(final[i]);
+        }
+    }
+
+    for(int num : even_odd_array)
+    {
+        cout<<num<< " ";
+    }cout<<endl;
+}
