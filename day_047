@@ -1,0 +1,33 @@
+int CheckPassword(char str[], int n)
+{
+    int capital_count = 0, numberic_count = 0;
+
+    if(str[0] == ' ' || str[0] == '/' || str[0] >= '0' && str[0] <= '9')
+        return 0;
+    for(int i = 0; i < n; i++)
+    {   
+        if(str[i] >='A' && str[i] <= 'Z')
+            capital_count++;
+
+        if(str[i] - '0' >= '0' && str[i] -'0' <= '9')
+            numberic_count++;
+    }
+
+    if(n > 4 && capital_count >= 1 && numberic_count >= 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int main ()
+{
+  string s;
+  getline (cin, s);
+  int len = s.size ();
+  cout << CheckPassword (s, len);
+  return 0;
+}
