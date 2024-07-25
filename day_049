@@ -1,0 +1,43 @@
+int sumSecondLargest(int matrix[][100], int row, int col)
+{
+    int odd_First = INT32_MIN, odd_Second;
+    int even_First = INT32_MIN, even_Second;
+
+    for(auto i = 0; i < row; i++)
+    {
+        for(auto j = 0; j < col; j++)
+        {
+            if(matrix[i][j] % 2 == 0 && matrix[i][j] > even_First)
+            {
+                even_Second = even_First;
+                even_First = matrix[i][j];
+            }
+            else if(matrix[i][j] % 2 != 0 && matrix[i][j] > odd_First)
+            {
+                odd_Second = odd_First;
+                odd_First = matrix[i][j];
+            }
+        }
+    }
+    return odd_Second + even_Second;
+}
+
+int main()
+{
+    int row, col;
+    cout<<"Enter the rows and columns of Matrix"<<endl;
+    cin>>row >>col;
+
+    int matrix[row][col];
+    for(auto i = 0; i < row; i++)
+    {
+        for(auto j = 0; j < col; j++)
+        {
+            cin>>matrix[i][j];
+        }
+    }
+
+    cout<<"Answer = "<<sumSecondLargest(matrix, row, col);
+
+    return 0;
+}
