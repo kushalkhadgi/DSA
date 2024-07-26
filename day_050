@@ -1,0 +1,44 @@
+vector<int> subarray(int length, vector<int> array)
+{
+    int max = INT32_MIN;
+    int sum = 0;
+    vector<int> answer;
+
+    for(int i = 0; i < length; i++)
+    {
+        sum = sum + array[i];
+        answer.push_back(array[i]);
+        
+        if(max < sum)
+            max = sum;
+        
+        if(sum < 0)
+        {
+            sum = 0;
+            answer.clear();
+        }
+    }
+    return answer;
+}
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of Array : ";
+    cin>>length;
+
+    vector<int> array(length);
+    for(auto i = 0; i < length; i++)
+    {
+        // cout<<"Enter the Element at "<<i + 1<<" indx in the array ";
+        cin>>array[i];
+    }
+
+    vector<int> answer = subarray(length, array);
+
+    for(int num : answer)
+    {
+        cout<<num<<" ";
+    }
+    return 0;
+}
