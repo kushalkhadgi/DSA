@@ -1,0 +1,41 @@
+
+#include <iostream>
+using namespace std;
+
+int FindAutoCount(string n)
+{
+    if(n == "")
+        return 0;
+    for(int i = 0; i < n.size(); i++)
+    {
+        int count = 0;
+        for(int j = 0; n[j] != '\0'; j++)
+        {
+            if(i == n[j] - '0')
+                count++;
+        }
+        if(n[i] - '0' != count)
+            return 0;
+    }
+    
+    bool check[10];
+    fill_n(check, 10, 0);
+    int answer = 0;
+    for(auto num: n)
+    {
+        if(!check[num - '0'])
+            answer++;
+        check[num - '0'] = true;
+    }
+    return answer;
+}
+
+int main()
+{
+    string n;
+    getline(cin, n);
+
+    cout<<FindAutoCount(n);
+
+    return 0; 
+}
