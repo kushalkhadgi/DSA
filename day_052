@@ -1,0 +1,45 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+string DectToNBase(int n, int num)
+{
+    string answer;
+    unordered_map<int, char> pair;
+
+    for(int i = 0; i < 10; i++)
+    {
+        pair[i] = '0' + i;
+    }
+
+    for(int i = 10; i < 36; i++)
+    {
+        pair[i] = 'A' + (i - 10);
+    }
+
+    while(num > 0)
+    {
+        int rem = num % n;
+        answer.push_back(pair[rem]);
+        num /= n;
+    }
+    reverse(answer.begin(), answer.end());
+    return answer;
+}
+
+int main()
+{
+    int n, num;
+    cout<<"Enter the Value of n : ";
+    cin>>n;
+
+    cout<<"Enter the value of num : ";
+    cin>>num;
+
+    cout<<DectToNBase(n, num);
+
+    return 0;
+}
