@@ -1,0 +1,38 @@
+
+#include <iostream>
+#include <vector>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    int length;
+    cout<<"Enter the length of Array : ";
+    cin>>length;
+
+    vector<int> array(length);
+    for(auto i = 0; i < length; i++)
+    {
+        // cout<<"Enter the Element at "<<i + 1<<" indx in the array ";
+        cin>>array[i];
+    }
+
+    int sum = 0;
+    for(auto num : array)
+    {
+        sum += num;
+    }
+    cout<<"Sum = "<<sum<<endl;
+
+    int average = sum / length;
+
+    int answer = 0;
+    for(int num : array)
+    {
+        answer += pow((num - average), 2);
+    }
+
+    cout<<(sqrt(answer / length));
+
+    return 0;
+}
