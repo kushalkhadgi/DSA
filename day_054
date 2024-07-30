@@ -1,0 +1,32 @@
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+pair<float, float> roots(int a, int b, int c)
+{
+	float D = pow(b, 2) - 4*a*c;
+	pair<float, float> answer;
+	answer.first = (-b + sqrt(D)) / 2*a;
+	answer.second = (-b - sqrt(D)) / 2*a;
+	return answer;
+}
+
+int main()
+{
+	int a, b, c;
+	cout<<"Enter a : ";
+	cin>>a;
+
+	cout<<"Enter b : ";
+	cin>>b;
+
+	cout<<"Enter c : ";
+	cin>>c;
+
+	pair<float, float> answer = roots(a, b, c);
+
+	cout<<answer.first<<" and "<<answer.second;
+
+	return 0;
+}
