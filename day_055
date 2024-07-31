@@ -1,0 +1,47 @@
+void FrequentCharacterReplaced(string &str, char x)
+{
+    int count[26];
+    fill_n(count, 26, 0);
+    int length = str.size();
+
+    for(auto i = 0; i < length; i++)
+    {
+        count[int(str[i] - 'a')]++;
+    }
+    
+    int max = INT32_MIN;
+    char replace_with = '\0';
+    for(auto i = 0; i < 26; i++)
+    {
+        if(max < count[i])
+        {
+            max = count[i];
+            replace_with = 'a' + i;
+        }
+    }
+    // cout<<"Replace With = "<<replace_with<<endl;
+    
+    for(auto i = 0; i < length; i++)
+    {
+        if(str[i] == replace_with)
+            str[i] = x;
+    }
+    return;
+}
+
+int main()
+{
+    string str;
+    char x;
+
+    cout<<"Enter String : ";
+    cin>>str;
+
+    cout<<"Enter character to replace : ";
+    cin>>x;
+
+    FrequentCharacterReplaced(str, x);
+
+    cout<<str;
+    return 0;
+}
