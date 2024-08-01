@@ -1,0 +1,41 @@
+vector<char> prefix(vector<string> strs)
+{
+    vector<char> answer;
+    int index = 0;
+    string temp = strs[0];
+    bool flag = true;
+
+    while(flag)
+    {
+        char check = temp[index];
+
+        for(string word : strs)
+        {
+            if(word[index] != check)
+            {
+                flag = false;
+                break;
+            }
+        }
+        if(flag)
+        {
+            answer.push_back(check);
+            index++;
+        }
+    }
+    return answer;
+}
+
+int main()
+{
+    // vector<string> strs = {"flower","flow","flight"};
+    vector<string> strs = {"dog", "racer", "car"};
+
+    vector<char> answer = prefix(strs);
+    
+    for(auto alphabet : answer)
+    {
+        cout<<alphabet<<".";
+    }
+    return 0;
+}
