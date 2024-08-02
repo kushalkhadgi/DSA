@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int totalCard(int height)
+{
+    int temp = height;
+    int answer = 0;
+    while(temp > 0)
+    {
+        answer += temp*3;
+        temp--;
+    }
+    return answer - height;
+}
+
+int main()
+{
+    int height;
+    cout<<"Enter the height of the Pyramid ";
+    cin>>height;
+
+    cout<<"Answer = "<<totalCard(height);
+
+    return 0;
+}
