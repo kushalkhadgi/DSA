@@ -1,28 +1,22 @@
-
 #include <iostream>
-#include <unordered_set>
+#include <math.h>
 using namespace std;
 
-bool isHappy(int number)
+bool isHappy(int n) 
 {
-    unordered_set<int> seen;
-    
-    while (number != 1 && seen.find(number) == seen.end())
-    {
-        seen.insert(number);
-        int sum = 0;
-        
-        while (number > 0)
+    int sum = 0;
+    while (n != 1 && n != 4) 
+    { 
+        sum = 0;
+        while (n > 0) 
         {
-            int digit = number % 10;
-            number /= 10;
-            sum += digit * digit;
+            int digit = n % 10;
+            sum += pow(digit, 2);
+            n /= 10;
         }
-        
-        number = sum;
+        n = sum;
     }
-    
-    return number == 1;
+    return n == 1;
 }
 
 int main()
