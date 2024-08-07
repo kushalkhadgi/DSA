@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+bool findWords(int row, int col, vector<vector<char>> matrix, string word, int i, int j, int index = 0) 
+{
+    if (index == word.length()) 
+    {
+        return true;
+    }
+
+    if (i < 0 || i >= row || j < 0 || j >= col || matrix[i][j] != word[index]) 
+    {
+        return false;
+    }
+
+    char temp = matrix[i][j];
+    matrix[i][j] = '#';
+
+    bool found = findWords(row, col, matrix, word, i + 1, j, index + 1) ||
+                 findWords(row, col, matrix, word, i - 1, j, index + 1) ||
+                 findWords(row, col, matrix, word, i, j + 1, index + 1) ||
+                 findWords(row, col, matrix, word, i, j - 1, index + 1);
+
+    matrix[i][j] = temp;
+
+    return found;
+}
+
+int main() 
+{
+    int row, col;
+    cout << "Enter Number of Rows and Columns: ";
+    cin >> row >> col;
+
+    vector<vector<char>> matrix(row, vector<char>(col));
+    cout << "Enter the alphabets in row and column:" << endl;
+
+    for (int i = 0; i < row; i++) 
+    {
+        for (int j = 0; j < col; j++) 
+        {
+            cin >> matrix[i][j];
+        }
+    }
+
+    vector<string> words = {"oath", "pea", "eat", "rain"};
+    vector<string> answer;
+
+    for (string word : words) 
+    {
+        bool found = false;
+        for (int i = 0; i < row && !found; i++) 
+        {
+            for (int j = 0; j < col && !found; j++) 
+            {
+                if (word[0] == matrix[i][j]) 
+                {
+                    if (findWords(row, col, matrix, word, i, j)) 
+                    {
+                        answer.push_back(word);
+                        found = true; 
+                    }
+                }
+            }
+        }
+    }
+
+    cout << "Found words: ";
+    for (string z : answer) 
+    {
+        cout << z << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
