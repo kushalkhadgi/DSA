@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+string helper(int number)
+{
+    vector<string> below_20 = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+    vector<string> tens = {"", "Ten", "Twenty", "Thirty", "Fourty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+    if(number == 0)
+        return "";
+    else if(number < 20)
+        return below_20[number] + " ";
+    else if(number < 100)
+        return tens[number / 10] + " " + helper(number % 10);
+    else 
+    {
+        return below_20[number / 100]+ " " + "Hundred" + " " + helper(number % 100);
+    }
+}
+
+string numberToWords(int number)
+{
+    string answer;
+
+    vector<string> thousands = {"", "Thousand", "Million", "Billion"};
+
+    int i = 0;
+    while(number > 0)
+    {
+        answer = helper(number % 1000) + thousands[i] + answer;
+        number /= 1000;
+        i++;
+    }
+    return answer;
+}
+
+int main()
+{
+    int number;
+    cout<<"Enter Number : ";
+    cin>>number;
+
+    string answer = numberToWords(number);
+
+    cout<<answer;
+    return 0;
+}
