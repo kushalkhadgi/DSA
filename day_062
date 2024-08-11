@@ -1,157 +1,158 @@
 #include<iostream>
-
 using namespace std;
 
 class Node
 {
-public:
-int data;
-Node* next;
-Node(int data)
-{
-this->data = data;
-next = NULL;
-}
+    public:
+    int data;
+    Node* next;
+    
+    Node(int data)
+    {
+        this->data = data;
+        next = NULL;
+    }
 };
+
 class LinkedList
 {
-public:
-void insertatbegin(int data, Node* &head)
-{
-Node* new_node = new Node(data);
-new_node -> next = head;
-head = new_node;
-return;
-}
-void insertatend(int data, Node* &head)
-{
-Node* new_node = new Node(data);
-if(head == NULL)
-{
-head = new_node;
-return;
-}
-Node* temp;
-temp = head;
-while(temp->next != NULL)
-{
-temp = temp -> next;
-}
-temp -> next = new_node;
-return;
-}
-void insertatmid(int data, Node* &head, int index)
-{
+    public:
+    void insertatbegin(int data, Node* &head)
+    {
+        Node* new_node = new Node(data);
+        new_node -> next = head;
+        head = new_node;
+        return;
+    }
+    void insertatend(int data, Node* &head)
+    {
+        Node* new_node = new Node(data);
+        if(head == NULL)
+        {
+            head = new_node;
+            return;
+        }
+        Node* temp;
+        temp = head;
+        while(temp->next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = new_node;
+        return;
+    }
+    void insertatmid(int data, Node* &head, int index)
+    {
+        if(index == 0)
 
-if(index == 0)
-
-return insertatbegin(data, head);
-Node* new_node = new Node(data);
-Node* temp = head;
-for(int i = 0; i < index-1; i++)
-{
-temp = temp->next;
-}
-new_node->next = temp->next;
-temp->next = new_node;
-return;
-}
-void display(Node* head)
-{
-Node *temp = head;
-while(temp != NULL)
-{
-cout<<temp->data<<" ";
-temp= temp -> next;
-}
-cout<<endl;
-return;
-}
-void deleteatindex(Node* &head, int index)
-{
-Node* temp = head;
-for(int i = 0; i < index-1; i++)
-{
-temp = temp -> next;
-}
-Node* DEL = temp->next;
-temp -> next = temp -> next -> next;
-free(DEL);
-return;
-}
-void deleteatstart(Node* &head)
-{
-Node* DEL = head;
-head = head -> next;
-free(DEL);
-return;
-}
-void deleteatend(Node* &head)
-
-{
-
-Node* temp = head;
-while(temp -> next -> next != NULL)
-{
-temp = temp -> next;
-}
-Node* DEL = temp->next;
-temp->next = NULL;
-free(DEL);
-return;
-}
+        return insertatbegin(data, head);
+        Node* new_node = new Node(data);
+        Node* temp = head;
+        for(int i = 0; i < index-1; i++)
+        {
+            temp = temp->next;
+        }
+        new_node->next = temp->next;
+        temp->next = new_node;
+        return;
+    }
+    void display(Node* head)
+    {
+        Node *temp = head;
+        while(temp != NULL)
+        {
+            cout<<temp->data<<" ";
+            temp= temp -> next;
+        }
+        cout<<endl;
+        return;
+    }
+    void deleteatindex(Node* &head, int index)
+    {
+        Node* temp = head;
+        for(int i = 0; i < index-1; i++)
+        {
+            temp = temp -> next;
+        }
+        Node* DEL = temp->next;
+        temp -> next = temp -> next -> next;
+        free(DEL);
+        return;
+    }
+    void deleteatstart(Node* &head)
+    {
+        Node* DEL = head;
+        head = head -> next;
+        free(DEL);
+        return;
+    }
+    void deleteatend(Node* &head)
+    {
+        Node* temp = head;
+        while(temp -> next -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        Node* DEL = temp->next;
+        temp->next = NULL;
+        free(DEL);
+        return;
+    }
 };
 class Question
 {
-public:
-bool checkequal(Node* refrence, Node* list)
-{
-Node* traverse = list;
-while(traverse != NULL)
-{
-if(refrence->data == traverse->data)
-{
-cout<<refrence->data<<endl;
-return true;
-}
-traverse = traverse -> next;
-}
-return false;
-}
+    public:
+    bool checkequal(Node* refrence, Node* list)
+    {
+        Node* traverse = list;
+        while(traverse != NULL)
+        {
+            if(refrence->data == traverse->data)
+            {
+                cout<<refrence->data<<endl;
+                return true;
+            }
+            traverse = traverse -> next;
+        }
+        return false;
+    }       
 };
+
 int main()
 {
-Node* mylist1 = NULL;
-Node* mylist2 = NULL;
-LinkedList LL;
-Question que;
-LL.insertatbegin(2, mylist1);
-LL.insertatbegin(4, mylist1);
-LL.insertatbegin(3, mylist1);
-LL.insertatbegin(5, mylist2);
-LL.insertatbegin(6, mylist2);
-LL.insertatbegin(4, mylist2);
-LL.display(mylist1);
+    Node* mylist1 = NULL;
+    Node* mylist2 = NULL;
+    LinkedList LL;
+    Question que;
+    
+    LL.insertatbegin(2, mylist1);
+    LL.insertatbegin(4, mylist1);
+    LL.insertatbegin(3, mylist1);
+    LL.insertatbegin(5, mylist2);
+    LL.insertatbegin(6, mylist2);
+    LL.insertatbegin(4, mylist2);
+    LL.display(mylist1);
 
-LL.display(mylist2);
+    LL.display(mylist2);
 
-Node* temp = mylist1;
-bool result = false;
-while(temp != NULL)
-{
-if(que.checkequal(temp, mylist2))
-{
-result = true;
-break;
-}
-temp = temp->next;
-}
-if(result)
-{
-cout<<"True";
-}
-else{
-cout<<"False";
-}
-return 0;
-}
+    Node* temp = mylist1;
+    bool result = false;
+    while(temp != NULL)
+    {
+        if(que.checkequal(temp, mylist2))
+        {
+            result = true;
+            break;
+        }
+        temp = temp->next;
+    }
+    if(result)  
+    {
+        cout<<"True";
+    }
+    else
+    {
+        cout<<"False";
+    }
+    return 0;
+}   
